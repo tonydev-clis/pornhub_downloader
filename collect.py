@@ -30,14 +30,5 @@ def collect_links():
     new_links = collect(data)
     write_json(data,new_links)
 
-def delete_link(data):
-    while True:
-        links_to_delete = input('Links to delete: ').lower()
-        if links_to_delete == 'b' or links_to_delete == 'q' or len(links_to_delete) == 0:
-            break
-        else:
-            data.remove(links_to_delete)
-
-
 if __name__ == '__main__':
     collect_links()
