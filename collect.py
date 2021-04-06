@@ -3,7 +3,7 @@ import requests
 
 def read_json(filename='data.json'):
     with open(filename, 'r+', encoding='utf-8') as file:
-        data = json.loads(file.read())
+        data = json.load(file)
     return data
 
 def collect(data):
