@@ -23,7 +23,7 @@ def collect(data):
 
 def write_json(data, new_links, filename='data.json'):
     with open(filename, 'w', encoding='utf-8') as file:
-        file.write(json.dumps(data+new_links))
+        file.write(json.dumps({'links':data+new_links}))
 
 def collect_links():
     data = read_json()
