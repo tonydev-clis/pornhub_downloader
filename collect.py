@@ -1,6 +1,8 @@
 import json
 import requests
 import re
+import logging
+logging.basicConfig(level=logging.INFO, format='%(levelname)s: %(lineno)s: %(message)s')
 def read_json(filename='data.json'):
     with open(filename, 'r+', encoding='utf-8') as file:
         data = json.load(file)['links']
@@ -11,16 +13,16 @@ def collect(data):
     while True:
         new_link = input('Insert new links: ').lower()
         if new_link == 'q' or new_link == 'b' or len(new_link) == 0:
-            print('Program has ended')
+            logging.info('Program has ended')
             break
         if new_link in data:
-            print('Duplicate links in storage')
+            logging.warning('Duplicate links in storage')
             continue
         if new_link in new_links:
-            print('Duplicate links in recent entered link')
+            logging.warning('Duplicate links in recent entered link')
             continue
         if 'https://www.pornhub.com/view_video.php?viewkey' not in new_link:
-            print('Not a valid pornhub link!')
+            logging.warning('Not a valid pornhub link!')
             continue
         else:
             new_links.append(new_link)
