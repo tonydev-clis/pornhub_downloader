@@ -11,6 +11,7 @@ def collect(data):
     while True:
         new_link = input('Insert new links: ').lower()
         if new_link == 'q' or new_link == 'b' or len(new_link) == 0:
+            print('Program has ended')
             break
         if new_link in data:
             print('Duplicate links in storage')
