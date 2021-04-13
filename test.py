@@ -38,7 +38,7 @@ def download(links):
                 client = Client(account_sid, auth_token)
                 message = client.messages.create(
                     body={'ph download error'}, from_="+18592953746", to="+62816300111")
-                logger.warning(f"{link}\n{e}")
+                logger.warning(f"Url: {video_url}, id: {video_id}, title: {video_title}\n{e}")
                 continue
 
 
