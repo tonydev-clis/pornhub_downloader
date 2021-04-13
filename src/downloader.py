@@ -2,8 +2,8 @@ import youtube_dl
 import json
 from time import sleep as s
 from twilio.rest import Client
-from pornhub import logger
-def get_links(filename='data.json'):
+import logger
+def get_links(filename='../data/data.json'):
     with open(filename, 'r') as file:
         return json.load(file)['links']
 
