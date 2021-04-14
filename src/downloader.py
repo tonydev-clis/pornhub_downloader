@@ -2,8 +2,8 @@ import youtube_dl
 import json
 from time import sleep as s
 from twilio.rest import Client
-import logger
-def get_links(filename='../data/data.json'):
+from logger import pornhub_logger
+def get_links(filename='./data/data.json'):
     with open(filename, 'r') as file:
         return json.load(file)['links']
 
@@ -23,13 +23,13 @@ def download(links):
 
             # ydl.download(links)
             except Exception as e:
-                account_sid = "AC67d1437cea8593339dce6ec20c4eeeb3"
-                auth_token = "60e2616f01b750c78efd6d44022a8210"
-                client = Client(account_sid, auth_token)
-                client = Client(account_sid, auth_token)
-                message = client.messages.create(
-                    body={'ph download error'}, from_="+18592953746", to="+62816300111")
-                logger.warning(f"{link}\n{e}")
+                # account_sid = "AC67d1437cea8593339dce6ec20c4eeeb3"
+                # auth_token = "60e2616f01b750c78efd6d44022a8210"
+                # client = Client(account_sid, auth_token)
+                # client = Client(account_sid, auth_token)
+                # message = client.messages.create(
+                #     body={'ph download error'}, from_="+18592953746", to="+62816300111")
+                pornhub_logger.warning(f"{link}\n{e}")
                 continue
 
 

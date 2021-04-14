@@ -3,7 +3,7 @@ import requests
 import re
 import logging
 logging.basicConfig(level=logging.INFO, format='%(levelname)s: %(lineno)s: %(message)s')
-def read_json(filename='../data/data.json'):
+def read_json(filename='./data/data.json'):
     with open(filename, 'r+', encoding='utf-8') as file:
         data = json.load(file)['links']
     return data
@@ -28,7 +28,7 @@ def collect(data):
             new_links.append(new_link)
     return new_links
 
-def write_json(data, new_links, filename='../data/data.json'):
+def write_json(data, new_links, filename='./data/data.json'):
     with open(filename, 'w', encoding='utf-8') as file:
         json.dump(({'links':data+new_links}),file)
 
