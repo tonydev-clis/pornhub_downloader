@@ -33,7 +33,7 @@ def check(downloaded_data, new_data):
 
 def write_json(downloaded_data, checked_new_data, filename='./data/data.json'):
     with open(filename, 'w', encoding='utf-8') as file:
-        json.dump(({'downloaded_links':downloaded_data, 'new_links':checked_new_data}),file)
+        json.dump(({'downloaded_links':downloaded_data, 'new_links':checked_new_data}),file, indent = 4)
 
 def collect_links():
     downloaded_data, new_data= get_storage_links()
