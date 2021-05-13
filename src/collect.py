@@ -1,11 +1,8 @@
 import json
-import requests
-import re
 import logging
 
-from downloader import download
 logging.basicConfig(level=logging.INFO, format='%(levelname)s: %(lineno)s: %(message)s')
-def get_storage_links(filename='./data/data.json'):
+def get_storage_links(filename):
     with open(filename, 'r+', encoding='utf-8') as file:
         data = json.load(file)
         downloaded_data = data['downloaded_links']
@@ -31,14 +28,14 @@ def check(downloaded_data, new_data):
             new_data.append(new_link)
     return new_data
 
-def write_json(downloaded_data, checked_new_data, filename='./data/data.json'):
+def write_json(downloaded_data, checked_new_data, filename):
     with open(filename, 'w', encoding='utf-8') as file:
         json.dump(({'downloaded_links':downloaded_data, 'new_links':checked_new_data}),file, indent = 4)
 
-def collect_links():
-    downloaded_data, new_data= get_storage_links()
+def collect_links(filename):
+    downloaded_data, new_data= get_storage_links(filename)
     checked_new_data = check(downloaded_data, new_data)
-    write_json(downloaded_data, checked_new_data)
+    write_json(downloaded_data, checked_new_data, filename)
 
 if __name__ == '__main__':
-    collect_links()
+    collect_links('./data/data.json')
