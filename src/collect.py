@@ -1,21 +1,25 @@
 import json
 import logging
 
-logging.basicConfig(level=logging.INFO, format='%(levelname)s: %(lineno)s: %(message)s')
+logging.basicConfig(level=logging.INFO,
+                    format='%(levelname)s: %(lineno)s: %(message)s')
+
+
 def get_storage_links(filename):
     with open(filename, 'r+', encoding='utf-8') as file:
         data = json.load(file)
-        downloaded_data = data['downloaded_links']
+        downloaded_links = data['downloaded_links']
         new_data = data['new_links']
-    return downloaded_data, new_data
+    return downloaded_links, new_data
 
-def check(downloaded_data, new_data):
+
+def check(downloaded_links, new_data):
     while True:
         new_link = input('Insert new links: ').lower()
         if new_link == 'q' or new_link == 'b' or len(new_link) == 0:
             logging.info('Program has ended')
             break
-        if new_link in downloaded_data:
+        if new_link in downloaded_links:
             logging.warning('Duplicate links in storage')
             continue
         if new_link in new_data:
@@ -28,14 +32,22 @@ def check(downloaded_data, new_data):
             new_data.append(new_link)
     return new_data
 
-def write_json(downloaded_data, checked_new_data, filename):
-    with open(filename, 'w', encoding='utf-8') as file:
-        json.dump(({'downloaded_links':downloaded_data, 'new_links':checked_new_data}),file, indent = 4)
 
-def collect_links(filename):
-    downloaded_data, new_data= get_storage_links(filename)
-    checked_new_data = check(downloaded_data, new_data)
-    write_json(downloaded_data, checked_new_data, filename)
+def write_json(downloaded_links, checked_new_data, filename):
+    with open(filename, 'w', encoding='utf-8') as file:
+        json.dump({
+            'downloaded_links': downloaded_links,
+            'new_links': checked_new_data
+        },
+                  file,
+                  indent=4)
+
+
+def collect_links(filename='./data/data.json'):
+    downloaded_links, new_data = get_storage_links(filename)
+    checked_new_data = check(downloaded_links, new_data)
+    write_json(downloaded_links, checked_new_data, filename)
+
 
 if __name__ == '__main__':
-    collect_links('./data/data.json')
+    collect_links()
