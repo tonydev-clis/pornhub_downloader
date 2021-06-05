@@ -3,3 +3,4 @@ options.txt
 *.json
 *.part
 *.log
+__pycache__

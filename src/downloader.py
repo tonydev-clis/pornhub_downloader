@@ -13,15 +13,7 @@ def start_download(new_links):
         'ignoreerrors': True
     }
     with youtube_dl.YoutubeDL(options) as ydl:
-        for new_link in new_links:
-            try:
-                info_dict = ydl.extract_info(new_link)
-
-            # ydl.start_download(links)
-            except Exception as e:
-                pornhub_logger.warning(f"{new_link}\n{e}")
-                continue
-
+        ydl.download(new_links)
 
 def organize_links(downloaded_links, new_links):
     downloaded_links += new_links
@@ -34,8 +26,7 @@ def write_downloaded_json(filename, downloaded_links):
             'downloaded_links': downloaded_links,
             'new_links': []
         },
-                  file,
-                  indent=4)
+                  file)
 
 
 def download(filename='./data/data.json'):
